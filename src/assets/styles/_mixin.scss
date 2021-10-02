@@ -1,0 +1,132 @@
+/**
+ * 高清适配设置，以iPhone8 尺寸 375x667 位根元素为基准值
+ */
+@use "sass:math";
+
+$base_size: 75;
+
+/** $px 为750px设计稿上显示的尺寸 **/
+@function rem($px) {
+  // @return ($px / $base_size) * 1rem;
+  @return math.div($px, $base_size) * 1rem;
+}
+
+/* 清除浮动 */
+.clearfix{
+  &::after{
+    content: '';
+    display: table;
+    clear: both;
+  }
+}
+
+/** 
+* 1px 顶部单边框样式
+* $border_color: 边框颜色
+*/
+@mixin top-border($border_color) {
+  &::before{
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 0;
+    width: 100%;
+    height: 1px;
+    background-color: $br-default;
+    @if $border_color {
+      background-color: $border_color;
+    }
+    transform: scaleY(.5);
+  }
+}
+/** 
+* 1px 底部单边框样式
+* $border_color: 边框颜色
+*/
+@mixin bottom-border($border_color) {
+  &::after{
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    z-index: 0;
+    width: 100%;
+    height: 1px;
+    background-color: $br-default;
+    @if $border_color {
+      background-color: $border_color;
+    }
+    transform: scaleY(.5);
+  }
+}
+
+/** 
+* 1px 左边单边框样式
+* $border_color: 边框颜色
+*/
+@mixin left-border($border_color) {
+  &::before{
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 0;
+    width: 1px;
+    height: 100%;
+    background-color: $br-default;
+    @if $border_color {
+      background-color: $border_color;
+    }
+    transform: scaleY(.5);
+  }
+}
+/** 
+* 1px 右部单边框样式
+* $border_color: 边框颜色
+*/
+@mixin right-border($border_color) {
+  &::after{
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 0;
+    width: 1px;
+    height: 100%;
+    background-color: $br-default;
+    @if $border_color {
+      background-color: $border_color;
+    }
+    transform: scaleY(.5);
+  }
+}
+
+/** 
+* 1px 全边框样式
+* $border_color: 边框颜色
+* $radius_size: 倒角尺寸
+*/
+@mixin all-border($border_color, $radius_size) {
+  position: relative;
+  &::after{
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 1;
+    width: 200%;
+    height: 200%;
+    border-width: 1px;
+    border-color: $br-default;
+    border-style: solid;
+    @if $border_color {
+      border-color: $border_color;
+    }
+    @if $radius_size {
+      border-radius: $radius_size;
+    }
+    transform: scale(.5);
+    transform-origin: 0 0;
+  }
+}
